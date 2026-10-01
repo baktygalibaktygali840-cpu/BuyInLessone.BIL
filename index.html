@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BIL Market</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    nav button {
+      background: white;
+      color: #2563eb;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 60px 6%;
+      background: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #64748b;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .search {
+      max-width: 700px;
+      margin: auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    .search input,
+    .search select {
+      padding: 15px;
+      border: 1px solid #dbe2ea;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .search input {
+      flex: 1;
+    }
+
+    .search button {
+      padding: 15px 22px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 40px 6%;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .section-title {
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 45px;
+    }
+
+    .category {
+      background: white;
+      padding: 22px;
+      border-radius: 15px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,.05);
+    }
+
+    .category:hover {
+      transform: translateY(-2px);
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(0,0,0,.06);
+    }
+
+    .product-image {
+      height: 180px;
+      background: #e8eefc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .product-info {
+      padding: 18px;
+    }
+
+    .product-info h3 {
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: #2563eb;
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .city {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .sell-button {
+      display: block;
+      margin: 35px auto 0;
+      background: #16a34a;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 30px;
+      text-align: center;
+      background: #172033;
+      color: white;
+    }
+
+    @media (max-width: 650px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .search {
+        flex-direction: column;
+      }
+
+      header {
+        padding: 15px 4%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🛍️ BIL Market</div>
+
+  <nav>
+    <button onclick="login()">Войти</button>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <h1>Маркетплейс для учеников БИЛ</h1>
+
+  <p>
+    Покупай, продавай и общайся с учениками БИЛ
+    из разных городов Казахстана.
+  </p>
+
+  <div class="search">
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Что хотите найти?"
+    >
+
+    <select id="citySelect">
+      <option value="">Все города</option>
+      <option>Актау</option>
+      <option>Астана</option>
+      <option>Алматы</option>
+      <option>Актобе</option>
+      <option>Шымкент</option>
+    </select>
+
+    <button onclick="searchProducts()">
+      Найти
+    </button>
+  </div>
+
+</section>
+
+<main>
+
+  <h2 class="section-title">Категории</h2>
+
+  <div class="categories">
+
+    <div class="category">🎮 Игры</div>
+    <div class="category">💻 Электроника</div>
+    <div class="category">👕 Одежда</div>
+    <div class="category">📚 Книги</div>
+    <div class="category">🎒 Учёба</div>
+    <div class="category">🏀 Спорт</div>
+    <div class="category">🎁 Другое</div>
+
+  </div>
+
+  <h2 class="section-title">
+    Новые объявления
+  </h2>
+
+  <div class="products" id="products">
+
+    <div class="product" data-city="Актау">
+
+      <div class="product-image">
+        🎮
+      </div>
+
+      <div class="product-info">
+
+        <h3>Игровая мышь</h3>
+
+        <div class="price">
+          8 000 ₸
+        </div>
+
+        <div class="city">
+          📍 БИЛ Актау
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="product" data-city="Астана">
+
+      <div class="product-image">
+        🎧
+      </div>
+
+      <div class="product-info">
+
+        <h3>Игровые наушники</h3>
+
+        <div class="price">
+          12 000 ₸
+        </div>
+
+        <div class="city">
+          📍 БИЛ Астана
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="product" data-city="Алматы">
+
+      <div class="product-image">
+        📚
+      </div>
+
+      <div class="product-info">
+
+        <h3>Учебные книги</h3>
+
+        <div class="price">
+          4 000 ₸
+        </div>
+
+        <div class="city">
+          📍 БИЛ Алматы
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <button class="sell-button" onclick="createListing()">
+    ➕ Продать товар
+  </button>
+
+</main>
+
+<footer>
+  © 2026 BIL Market
+</footer>
+
+<script>
+
+function login() {
+  alert("Регистрация и вход появятся на следующем шаге.");
+}
+
+function createListing() {
+  alert(
+    "Первое объявление будет бесплатно на 7 дней. " +
+    "Следующие объявления — 250 ₸."
+  );
+}
+
+function searchProducts() {
+
+  const text =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  const city =
+    document
+      .getElementById("citySelect")
+      .value;
+
+  const products =
+    document.querySelectorAll(".product");
+
+  products.forEach(product => {
+
+    const title =
+      product
+        .querySelector("h3")
+        .textContent
+        .toLowerCase();
+
+    const productCity =
+      product.dataset.city;
+
+    const matchesText =
+      title.includes(text);
+
+    const matchesCity =
+      city === "" ||
+      city === productCity;
+
+    product.style.display =
+      matchesText && matchesCity
+        ? "block"
+        : "none";
+
+  });
+
+}
+
+</script>
+
+</body>
+</html>
